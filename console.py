@@ -13,11 +13,13 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
     """ class handel command interprete inherit from the cmd class """
 
     prompt = "(hbnb) "
-    __classes = {"BaseModel", "User", "Place", "State", "City", "Amenity", "Review"}
+    __classes = {"BaseModel", "User", "Place",
+                 "State", "City", "Amenity", "Review"}
 
     def do_quit(self, arg):
         """ Quit and exit the program """
@@ -85,8 +87,8 @@ class HBNBCommand(cmd.Cmd):
         obj_list = []
         if args:
             if args[0] not in HBNBCommand.__classes:
-                    print("** class doesn't exist **")
-                    return
+                print("** class doesn't exist **")
+                return
             else:
                 for value in storage.all().values():
                     if args[0] == value.__class__.__name__:
@@ -103,23 +105,23 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
-            return 
+            return
         elif args[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
             return
-        elif len(args) == 1 :
+        elif len(args) == 1:
             print("** instance id missing **")
             return
         else:
             for key, value in storage.all().items():
-                if args[0] == value.__class__.__name__ and args[1] == value.id :
+                if args[0] == value.__class__.__name__ and args[1] == value.id:
                     del storage.all()[key]
                     storage.save()
                     return
                 else:
                     print("** no instance found **")
 
-    def do_update(self,arg):
+    def do_update(self, arg):
         args = arg.split()
         if len(args) == 0:
             print(" class name missing ")
@@ -130,7 +132,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 1:
             print(" instance id missing ")
             return
-        key = "{}.{}".format(args[0],args[1])
+        key = "{}.{}".format(args[0], args[1])
         if key not in models.storage.all().keys():
             print(" no instance found ")
             return
@@ -144,8 +146,8 @@ class HBNBCommand(cmd.Cmd):
             attribute_value = args[3]
         if attribute_value.startswith('"') and attribute_value.endswith('"'):
             attribute_value = attribute_value[1:-1]
-            
-        setattr(models.storage.all()[key],args[2],attribute_value)
+
+        setattr(models.storage.all()[key], args[2], attribute_value)
         models.storage.all()[key].save()
 
 
