@@ -5,8 +5,6 @@
 '''
 
 import unittest
-import models
-import uuid
 from datetime import datetime
 from models.base_model import BaseModel
 from time import sleep

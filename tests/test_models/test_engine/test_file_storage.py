@@ -11,8 +11,6 @@ from models.place import Place
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-import json
-import uuid
 
 
 class TestFileStorage_instantiation(unittest.TestCase):
@@ -32,27 +30,27 @@ class TestFileStorage_instantiation(unittest.TestCase):
 class TestFileStorage_methods(unittest.TestCase):
 
     def test_dict_type(self):
-        instant = FileStorage
+        inst = FileStorage
         self.assertEqual(dict, type(models.storage.all()))
 
     def test_new_method(self):
-        instant = BaseModel()
-        models.storage.new(instant)
-        self.assertIn("BaseModel." + instant.id, models.storage.all().keys())
+        inst = BaseModel()
+        models.storage.new(inst)
+        self.assertIn("BaseModel." + inst.id, models.storage.all().keys())
 
     def test_save_method(self):
-        instant = BaseModel()
-        models.storage.new(instant)
+        inst = BaseModel()
+        models.storage.new(inst)
         models.storage.save()
         with open("file.json", "r") as f:
-            self.assertIn("BaseModel." + instant.id, f.read())
+            self.assertIn("BaseModel." + inst.id, f.read())
 
     def test_save_method(self):
-        instant = BaseModel()
-        models.storage.new(instant)
+        inst = BaseModel()
+        models.storage.new(inst)
         models.storage.save()
         models.storage.reload()
-        self.assertIn("BaseModel." + instant.id,
+        self.assertIn("BaseModel." + inst.id,
                       FileStorage._FileStorage__objects)
 
     def test_reload_no_file(self):

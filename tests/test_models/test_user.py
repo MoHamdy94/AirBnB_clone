@@ -10,22 +10,19 @@ from models.base_model import BaseModel
 from time import sleep
 from models.user import User
 from models.engine.file_storage import FileStorage
-import models
-import uuid
 
 
 class TestUser_instantiation(unittest.TestCase):
-
     def test_model_instantiation(self):
         self.assertEqual(User, type(User()))
 
     def test_att(self):
-        instant = User()
-        self.assertEqual(str, type(instant.email))
-        self.assertEqual(str, type(instant.password))
-        self.assertEqual(str, type(instant.first_name))
-        self.assertEqual(str, type(instant.last_name))
-        self.assertEqual(str, type(instant.id))
+        inst = User()
+        self.assertEqual(str, type(inst.email))
+        self.assertEqual(str, type(inst.password))
+        self.assertEqual(str, type(inst.first_name))
+        self.assertEqual(str, type(inst.last_name))
+        self.assertEqual(str, type(inst.id))
 
     def test_created_at(self):
         self.assertEqual(datetime, type(User().created_at))
@@ -39,28 +36,28 @@ class TestUser_instantiation(unittest.TestCase):
 class TestBaseModel_to_dict(unittest.TestCase):
 
     def test_check_type(self):
-        instant = User()
-        self.assertTrue(dict, type(instant.to_dict))
+        inst = User()
+        self.assertTrue(dict, type(inst.to_dict))
 
     def test_key_check(self):
-        instant = User()
-        self.assertIn("id", instant.to_dict())
-        self.assertIn("created_at", instant.to_dict())
-        self.assertIn("updated_at", instant.to_dict())
-        self.assertIn("__class__", instant.to_dict())
+        inst = User()
+        self.assertIn("id", inst.to_dict())
+        self.assertIn("created_at", inst.to_dict())
+        self.assertIn("updated_at", inst.to_dict())
+        self.assertIn("__class__", inst.to_dict())
 
     def test_date_time(self):
-        instant = User()
-        inst_dict = instant.to_dict()
+        inst = User()
+        inst_dict = inst.to_dict()
         self.assertTrue(str, type(inst_dict["created_at"]))
         self.assertTrue(str, type(inst_dict["updated_at"]))
 
     def test_save(self):
-        instant = User()
+        inst = User()
         sleep(0.05)
-        first_updated_at = instant.updated_at
-        instant.save()
-        self.assertLess(first_updated_at, instant.updated_at)
+        first_updated_at = inst.updated_at
+        inst.save()
+        self.assertLess(first_updated_at, inst.updated_at)
 
 
 

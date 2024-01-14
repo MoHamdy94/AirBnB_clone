@@ -10,8 +10,7 @@ from models.base_model import BaseModel
 from time import sleep
 from models.city import City
 from models.engine.file_storage import FileStorage
-import models
-import uuid
+
 
 
 class TestCity_instantiation(unittest.TestCase):
