@@ -51,9 +51,9 @@ class HBNBCommand(cmd.Cmd):
 
         return True
 
-    def help_quit(self):
-        """Prints help for the quit command"""
-        print("Quit command to exit the program\n")
+    # def help_quit(self):
+    #     """Prints help for the quit command"""
+    #     print("Quit command to exit the program\n")
 
     def do_EOF(self, arg):
         """Exits the program"""
@@ -66,7 +66,6 @@ class HBNBCommand(cmd.Cmd):
             Creates a new instance of BaseModel,
             saves it (to the JSON file) and prints
             the id.
-                Ex: $ create BaseModel
         """
 
         arg_lst = HBNBCommand.parse(arg)
@@ -85,18 +84,17 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
-    def help_create(self):
-        """
-            prints Help info for the create function
-        """
-        print("""Creats a new instance of the first argument
-              stores it in the JSON file and prints its id""")
+    # def help_create(self):
+    #     """
+    #         prints Help info for the create function
+    #     """
+    #     print("""Creats a new instance of the first argument
+    #           stores it in the JSON file and prints its id""")
 
     def do_show(self, arg):
         """
             Prints the string representation of an instance based
             on the class name and id.
-                Ex: $ show BaseModel 1234-1234-1234
         """
         arg_lst = HBNBCommand.parse(arg)
         db = storage.all()
@@ -110,22 +108,18 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
         else:
             print(db["{}.{}".format(arg_lst[0], arg_lst[1])])
-
-
-    def help_show(self):
-        """
-            Prints Help for for the creat function
-        """
-        print("""Prints the string representation of an instance based
-            on the class name and id.
-                Ex: $ show BaseModel 1234-1234-1234
-            """)
+# def help_show(self):
+    #     """
+    #         Prints Help for for the creat function
+    #     """
+    #     print("""Prints the string representation of an instance based
+    #         on the class name and id.
+    #         """)
 
     def do_destroy(self, arg):
         """
             Deletes an instance based on the class name and id
             (save the change into the JSON file).
-                Ex: $ destroy BaseModel 1234-1234-1234
         """
         arg_lst = HBNBCommand.parse(arg)
         storage.reload()
@@ -143,19 +137,18 @@ class HBNBCommand(cmd.Cmd):
             del db["{}.{}".format(arg_lst[0], arg_lst[1])]
             storage.save()
 
-    def help_destroy(self):
-        """
-            Prints Help for the destroy function
-        """
-        print("""Deletes an instance based on the class name and id
-              (save the change into the JSON file).
-                Ex: $ destroy BaseModel 1234-1234-1234""")
+    # def help_destroy(self):
+    #     """
+    #         Prints Help for the destroy function
+    #     """
+    #     print("""Deletes an instance based on the class name and id
+    #           (save the change into the JSON file).
+    #             Ex: $ destroy BaseModel 12345-12345-12345""")
 
     def do_all(self, arg):
         """
             Prints all string representation of all instances based or
             not on the class name.
-                Ex: $ all BaseModel or $ all
         """
         arg_ls = HBNBCommand.parse(arg)
         if len(arg_ls) > 0 and arg_ls[0] not in HBNBCommand.__class_lst:
@@ -169,20 +162,18 @@ class HBNBCommand(cmd.Cmd):
                     obj1.append(obj.__str__())
             print(obj1)
 
-    def help_all(self):
-        """
-            prints help for the all function
-        """
-        print("""Prints all string representation of all instances based or
-            not on the class name.
-                Ex: $ all BaseModel or $ all""")
+    # def help_all(self):
+    #     """
+    #         prints help for the all function
+    #     """
+    #     print("""Prints all string representation of all instances based or
+    #         not on the class name.
+    #             Ex: $ all BaseModel or $ all""")
 
     def do_update(self, arg):
         """
             Updates an instance based on the class name and id by adding or
             updating attribute (save the change into the JSON file).
-                Ex: $ update BaseModel 1234-1234-1234 email
-                      "aibnb@holbertonschool.com"
         """
         arg_ls = HBNBCommand.parse(arg)
         obj_dict = storage.all()
@@ -226,27 +217,26 @@ class HBNBCommand(cmd.Cmd):
                     obj.__dict__[k] = v
         storage.save()
 
-    def help_update(self):
-        """
-            prints Help for the update function
-        """
-        print(
-            """Updates an instance based on the class name and id by adding or
-            updating attribute (save the change into the JSON file).
-                Ex: $ update BaseModel 1234-1234-1234
-                      email "aibnb@holbertonschool.com""")
+    # def help_update(self):
+    #     """
+    #         prints Help for the update function
+    #     """
+    #     print(
+    #         """Updates an instance based
+    # on the class name and id by adding or
+    #         updating attribute (save the change into the JSON file).
+    #             Ex: $ update BaseModel 1234-1234-1234
+    #                   email "alx@school.com""")
 
     def emptyline(self):
         """
             Does nothing if Empty line + enter is inserted.
-            Used for overriding the emptyline function
         """
         pass
 
     def do_count(self, arg):
         """
-            Prnits the number of elements inside the FileStorage that
-            are of instances of cls
+            prints the number of elements inside the FileStorage
         """
         arg_ls = HBNBCommand.parse(arg)
         if len(arg_ls) > 0 and arg_ls[0] not in HBNBCommand.__class_lst:
@@ -283,7 +273,7 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, line):
         """
-            Handles the case where the the command has no equivlaent
+            Handles the case where the the command has no equivilant
             do_ method
         """
 
