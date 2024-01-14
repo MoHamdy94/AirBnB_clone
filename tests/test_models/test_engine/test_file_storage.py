@@ -1,7 +1,5 @@
 import unittest
 import models
-import json
-import uuid
 from datetime import datetime
 from models.base_model import BaseModel
 from time import sleep
@@ -13,12 +11,12 @@ from models.place import Place
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+import json
+import uuid
 
 
 class TestFileStorage_instantiation(unittest.TestCase):
-    '''Unittest for FileStorage class'''
-
-    def test_instantiations(self):
+    def test_model_instantiation(self):
         self.assertEqual(FileStorage, type(FileStorage()))
 
     def test_file_path(self):
@@ -32,20 +30,16 @@ class TestFileStorage_instantiation(unittest.TestCase):
 
 
 class TestFileStorage_methods(unittest.TestCase):
-    '''unittest for FileStorage methods'''
 
-    '''Unittest for all()'''
     def test_dict_type(self):
         instant = FileStorage
         self.assertEqual(dict, type(models.storage.all()))
 
-    '''Unittest for new()'''
     def test_new_method(self):
         instant = BaseModel()
         models.storage.new(instant)
         self.assertIn("BaseModel." + instant.id, models.storage.all().keys())
 
-    '''Unittest for save()'''
     def test_save_method(self):
         instant = BaseModel()
         models.storage.new(instant)
@@ -53,7 +47,6 @@ class TestFileStorage_methods(unittest.TestCase):
         with open("file.json", "r") as f:
             self.assertIn("BaseModel." + instant.id, f.read())
 
-    '''Unittest for reload()'''
     def test_save_method(self):
         instant = BaseModel()
         models.storage.new(instant)

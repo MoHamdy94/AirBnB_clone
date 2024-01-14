@@ -1,29 +1,26 @@
 #!/usr/bin/python3
-''' Unit test for Place class
-    - test for instantiation
-    - test for to_dict
+''' test Place class
+    - test instantiation
+    - test to_dict
 '''
 
 import unittest
-import models
-import uuid
 from datetime import datetime
 from models.base_model import BaseModel
 from time import sleep
 from models.place import Place
 from models.engine.file_storage import FileStorage
-
-# ============ test instantiation ===============
+import models
+import uuid
 
 
 class TestPlace_instantiation(unittest.TestCase):
     '''Unittest for User class'''
 
-    def test_instantiations(self):
+    def test_model_instantiation(self):
         self.assertEqual(Place, type(Place()))
 
-    # test for attributes
-    def test_att_type(self):
+    def test_att(self):
         instant = Place()
         self.assertEqual(str, type(instant.name))
         self.assertEqual(str, type(instant.city_id))
@@ -38,30 +35,29 @@ class TestPlace_instantiation(unittest.TestCase):
         self.assertEqual(float, type(instant.longitude))
         self.assertEqual(list, type(instant.amenity_ids))
 
-    def test_created_at_is_public_datetime(self):
+    def test_created_at(self):
         self.assertEqual(datetime, type(Place().created_at))
 
-    def test_id_notequal(self):
+    def test_id(self):
         id1 = Place()
         id2 = Place()
         self.assertNotEqual(id1.id, id2.id)
 
 
-# ============ test to_dict ===============
 class TestPlace_to_dict(unittest.TestCase):
 
-    def test_type(self):
+    def test_check_type(self):
         instant = Place()
         self.assertTrue(dict, type(instant.to_dict))
 
-    def test_keys(self):
+    def test_key_check(self):
         instant = Place()
         self.assertIn("id", instant.to_dict())
         self.assertIn("created_at", instant.to_dict())
         self.assertIn("updated_at", instant.to_dict())
         self.assertIn("__class__", instant.to_dict())
 
-    def test_datetime_string(self):
+    def test_date_time(self):
         instant = Place()
         inst_dict = instant.to_dict()
         self.assertTrue(str, type(inst_dict["created_at"]))
@@ -73,3 +69,6 @@ class TestPlace_to_dict(unittest.TestCase):
         first_updated_at = instant.updated_at
         instant.save()
         self.assertLess(first_updated_at, instant.updated_at)
+
+if __name__ == '__main__':
+    unittest.main()

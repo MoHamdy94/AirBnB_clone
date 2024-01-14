@@ -1,45 +1,43 @@
 import unittest
-import models
-import uuid
 from datetime import datetime
 from models.base_model import BaseModel
 from time import sleep
+import models
+import uuid
 
 
 class TestBaseModel(unittest.TestCase):
-    '''Unittest for Base_model'''
-    def test_instantiations(self):
-        self.assertEqual(BaseModel, type(BaseModel()))
-
-    def test_id_notequal(self):
+    def test_id_equal(self):
         id1 = BaseModel()
         id2 = BaseModel()
         self.assertNotEqual(id1.id, id2.id)
+    
+    def test_model_instantiation(self):
+        self.assertEqual(BaseModel, type(BaseModel()))
+
+
 
 class TestBaseModel_to_dict(unittest.TestCase):
-    ''' unittest for to_dict method'''
+    def test_date_time(self):
+        instant = BaseModel()
+        inst_dict = instant.to_dict()
+        self.assertTrue(str, type(inst_dict["created_at"]))
+        self.assertTrue(str, type(inst_dict["updated_at"]))
 
-    def test_type(self):
+    def test_check_type(self):
         instant = BaseModel
         self.assertTrue(dict, type(instant.to_dict))
 
-    def test_keys(self):
+    def test_key_check(self):
         instant = BaseModel()
         self.assertIn("id", instant.to_dict())
         self.assertIn("created_at", instant.to_dict())
         self.assertIn("updated_at", instant.to_dict())
         self.assertIn("__class__", instant.to_dict())
 
-    def test_datetime_string(self):
-        instant = BaseModel()
-        inst_dict = instant.to_dict()
-        self.assertTrue(str, type(inst_dict["created_at"]))
-        self.assertTrue(str, type(inst_dict["updated_at"]))
 
 
 class TestBaseModel_save(unittest.TestCase):
-    ''' unittest for save method'''
-
     def test_save(self):
         instant = BaseModel()
         sleep(0.05)
