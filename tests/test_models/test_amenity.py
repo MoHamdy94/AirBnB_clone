@@ -8,7 +8,6 @@ Unittest classes:
 """
 import os
 import models
-=======
 import unittest
 import unittest
 from datetime import datetime
