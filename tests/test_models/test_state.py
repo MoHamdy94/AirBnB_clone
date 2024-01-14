@@ -12,8 +12,6 @@ from models.state import State
 from models.engine.file_storage import FileStorage
 
 
-
-
 class TestState_instantiation(unittest.TestCase):
 
     def test_model_instantiation(self):
@@ -59,6 +57,7 @@ class TestState_to_dict(unittest.TestCase):
         first_updated_at = inst.updated_at
         inst.save()
         self.assertLess(first_updated_at, inst.updated_at)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -4,16 +4,14 @@ from models.base_model import BaseModel
 from time import sleep
 
 
-
 class TestBaseModel(unittest.TestCase):
     def test_id_equal(self):
         id1 = BaseModel()
         id2 = BaseModel()
         self.assertNotEqual(id1.id, id2.id)
-    
+
     def test_model_instantiation(self):
         self.assertEqual(BaseModel, type(BaseModel()))
-
 
 
 class TestBaseModel_to_dict(unittest.TestCase):
@@ -33,7 +31,6 @@ class TestBaseModel_to_dict(unittest.TestCase):
         self.assertIn("created_at", inst.to_dict())
         self.assertIn("updated_at", inst.to_dict())
         self.assertIn("__class__", inst.to_dict())
-
 
 
 class TestBaseModel_save(unittest.TestCase):

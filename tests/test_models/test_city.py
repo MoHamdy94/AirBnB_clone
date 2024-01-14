@@ -12,7 +12,6 @@ from models.city import City
 from models.engine.file_storage import FileStorage
 
 
-
 class TestCity_instantiation(unittest.TestCase):
 
     def test_model_instantiation(self):
@@ -30,7 +29,6 @@ class TestCity_instantiation(unittest.TestCase):
 
     def test_created_at(self):
         self.assertEqual(datetime, type(City().created_at))
-
 
 
 class TestCity_to_dict(unittest.TestCase):

@@ -12,7 +12,6 @@ from models.place import Place
 from models.engine.file_storage import FileStorage
 
 
-
 class TestPlace_instantiation(unittest.TestCase):
     '''Unittest for User class'''
 
@@ -68,6 +67,7 @@ class TestPlace_to_dict(unittest.TestCase):
         first_updated_at = inst.updated_at
         inst.save()
         self.assertLess(first_updated_at, inst.updated_at)
+
 
 if __name__ == '__main__':
     unittest.main()

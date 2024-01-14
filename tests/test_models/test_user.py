@@ -60,6 +60,5 @@ class TestBaseModel_to_dict(unittest.TestCase):
         self.assertLess(first_updated_at, inst.updated_at)
 
 
-
 if __name__ == '__main__':
     unittest.main()
