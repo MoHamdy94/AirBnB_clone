@@ -20,19 +20,19 @@ class TestPlace_instantiation(unittest.TestCase):
         self.assertEqual(Place, type(Place()))
 
     def test_att(self):
-        instant = Place()
-        self.assertEqual(str, type(instant.name))
-        self.assertEqual(str, type(instant.city_id))
-        self.assertEqual(str, type(instant.user_id))
-        self.assertEqual(str, type(instant.description))
-        self.assertEqual(int, type(instant.number_rooms))
-        self.assertEqual(int, type(instant.number_bathrooms))
-        self.assertEqual(int, type(instant.number_bathrooms))
-        self.assertEqual(int, type(instant.max_guest))
-        self.assertEqual(int, type(instant.price_by_night))
-        self.assertEqual(float, type(instant.latitude))
-        self.assertEqual(float, type(instant.longitude))
-        self.assertEqual(list, type(instant.amenity_ids))
+        inst = Place()
+        self.assertEqual(str, type(inst.name))
+        self.assertEqual(str, type(inst.city_id))
+        self.assertEqual(str, type(inst.user_id))
+        self.assertEqual(str, type(inst.description))
+        self.assertEqual(int, type(inst.number_rooms))
+        self.assertEqual(int, type(inst.number_bathrooms))
+        self.assertEqual(int, type(inst.number_bathrooms))
+        self.assertEqual(int, type(inst.max_guest))
+        self.assertEqual(int, type(inst.price_by_night))
+        self.assertEqual(float, type(inst.latitude))
+        self.assertEqual(float, type(inst.longitude))
+        self.assertEqual(list, type(inst.amenity_ids))
 
     def test_created_at(self):
         self.assertEqual(datetime, type(Place().created_at))
@@ -46,28 +46,28 @@ class TestPlace_instantiation(unittest.TestCase):
 class TestPlace_to_dict(unittest.TestCase):
 
     def test_check_type(self):
-        instant = Place()
-        self.assertTrue(dict, type(instant.to_dict))
+        inst = Place()
+        self.assertTrue(dict, type(inst.to_dict))
 
     def test_key_check(self):
-        instant = Place()
-        self.assertIn("id", instant.to_dict())
-        self.assertIn("created_at", instant.to_dict())
-        self.assertIn("updated_at", instant.to_dict())
-        self.assertIn("__class__", instant.to_dict())
+        inst = Place()
+        self.assertIn("id", inst.to_dict())
+        self.assertIn("created_at", inst.to_dict())
+        self.assertIn("updated_at", inst.to_dict())
+        self.assertIn("__class__", inst.to_dict())
 
     def test_date_time(self):
-        instant = Place()
-        inst_dict = instant.to_dict()
+        inst = Place()
+        inst_dict = inst.to_dict()
         self.assertTrue(str, type(inst_dict["created_at"]))
         self.assertTrue(str, type(inst_dict["updated_at"]))
 
     def test_save(self):
-        instant = Place()
+        inst = Place()
         sleep(0.05)
-        first_updated_at = instant.updated_at
-        instant.save()
-        self.assertLess(first_updated_at, instant.updated_at)
+        first_updated_at = inst.updated_at
+        inst.save()
+        self.assertLess(first_updated_at, inst.updated_at)
 
 if __name__ == '__main__':
     unittest.main()
