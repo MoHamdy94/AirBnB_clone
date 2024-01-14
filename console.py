@@ -122,6 +122,7 @@ class HBNBCommand(cmd.Cmd):
                     print("** no instance found **")
 
     def do_update(self, arg):
+        """ Update the basemodel"""
         args = arg.split()
         if len(args) == 0:
             print(" class name missing ")
