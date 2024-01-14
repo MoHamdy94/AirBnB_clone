@@ -4,7 +4,6 @@ A command line interpreter for AirBnB clone
 """
 
 import cmd
-
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -39,13 +38,13 @@ class HBNBCommand(cmd.Cmd):
         Returns a list conatning the parsed arguments from the string
         """
 
-        arg_list = arg.split(id)
-        narg_list = []
+        arg_ls = arg.split(id)
+        new_arg_ls = []
 
-        for x in arg_list:
+        for x in arg_ls:
             if x != '':
-                narg_list.append(x)
-        return narg_list
+                new_arg_ls.append(x)
+        return new_arg_ls
 
     def do_quit(self, arg):
         """Exits the program"""
@@ -112,9 +111,6 @@ class HBNBCommand(cmd.Cmd):
         else:
             print(db["{}.{}".format(arg_lst[0], arg_lst[1])])
 
-        # Extra case
-        # elif len(arg_lst) > 2:
-        #    print("** to many arguments **")
 
     def help_show(self):
         """
@@ -161,17 +157,17 @@ class HBNBCommand(cmd.Cmd):
             not on the class name.
                 Ex: $ all BaseModel or $ all
         """
-        arg_list = HBNBCommand.parse(arg)
-        if len(arg_list) > 0 and arg_list[0] not in HBNBCommand.__class_lst:
+        arg_ls = HBNBCommand.parse(arg)
+        if len(arg_ls) > 0 and arg_ls[0] not in HBNBCommand.__class_lst:
             print("** class doesn't exist **")
         else:
-            objl = []
+            obj1 = []
             for obj in storage.all().values():
-                if len(arg_list) > 0 and arg_list[0] == obj.__class__.__name__:
-                    objl.append(obj.__str__())
-                elif len(arg_list) == 0:
-                    objl.append(obj.__str__())
-            print(objl)
+                if len(arg_ls) > 0 and arg_ls[0] == obj.__class__.__name__:
+                    obj1.append(obj.__str__())
+                elif len(arg_ls) == 0:
+                    obj1.append(obj.__str__())
+            print(obj1)
 
     def help_all(self):
         """
@@ -188,44 +184,44 @@ class HBNBCommand(cmd.Cmd):
                 Ex: $ update BaseModel 1234-1234-1234 email
                       "aibnb@holbertonschool.com"
         """
-        arg_list = HBNBCommand.parse(arg)
-        objdict = storage.all()
+        arg_ls = HBNBCommand.parse(arg)
+        obj_dict = storage.all()
 
-        if len(arg_list) == 0:
+        if len(arg_ls) == 0:
             print("** class name missing **")
             return False
-        if arg_list[0] not in HBNBCommand.__class_lst:
+        if arg_ls[0] not in HBNBCommand.__class_lst:
             print("** class doesn't exist **")
             return False
-        if len(arg_list) == 1:
+        if len(arg_ls) == 1:
             print("** instance id missing **")
             return False
-        if "{}.{}".format(arg_list[0], arg_list[1]) not in objdict.keys():
+        if "{}.{}".format(arg_ls[0], arg_ls[1]) not in obj_dict.keys():
             print("** no instance found **")
             return False
-        if len(arg_list) == 2:
+        if len(arg_ls) == 2:
             print("** attribute name missing **")
             return False
-        if len(arg_list) == 3:
+        if len(arg_ls) == 3:
             try:
-                type(eval(arg_list[2])) != dict
+                type(eval(arg_ls[2])) != dict
             except NameError:
                 print("** value missing **")
                 return False
-        if len(arg_list) == 4:
-            obj = objdict["{}.{}".format(arg_list[0], arg_list[1])]
-            if arg_list[2] in obj.__class__.__dict__.keys():
-                valtype = type(obj.__class__.__dict__[arg_list[2]])
-                obj.__dict__[arg_list[2]] = valtype(arg_list[3])
+        if len(arg_ls) == 4:
+            obj = obj_dict["{}.{}".format(arg_ls[0], arg_ls[1])]
+            if arg_ls[2] in obj.__class__.__dict__.keys():
+                value_type = type(obj.__class__.__dict__[arg_ls[2]])
+                obj.__dict__[arg_ls[2]] = value_type(arg_ls[3])
             else:
-                obj.__dict__[arg_list[2]] = arg_list[3]
-        elif type(eval(arg_list[2])) == dict:
-            obj = objdict["{}.{}".format(arg_list[0], arg_list[1])]
-            for k, v in eval(arg_list[2]).items():
+                obj.__dict__[arg_ls[2]] = arg_ls[3]
+        elif type(eval(arg_ls[2])) == dict:
+            obj = obj_dict["{}.{}".format(arg_ls[0], arg_ls[1])]
+            for k, v in eval(arg_ls[2]).items():
                 if (k in obj.__class__.__dict__.keys() and type(
                         obj.__class__.__dict__[k]) in {str, int, float}):
-                    valtype = type(obj.__class__.__dict__[k])
-                    obj.__dict__[k] = valtype(v)
+                    value_type = type(obj.__class__.__dict__[k])
+                    obj.__dict__[k] = value_type(v)
                 else:
                     obj.__dict__[k] = v
         storage.save()
@@ -252,17 +248,17 @@ class HBNBCommand(cmd.Cmd):
             Prnits the number of elements inside the FileStorage that
             are of instances of cls
         """
-        arg_list = HBNBCommand.parse(arg)
-        if len(arg_list) > 0 and arg_list[0] not in HBNBCommand.__class_lst:
+        arg_ls = HBNBCommand.parse(arg)
+        if len(arg_ls) > 0 and arg_ls[0] not in HBNBCommand.__class_lst:
             print("** class doesn't exist **")
         else:
-            objl = []
+            obj1 = []
             for obj in storage.all().values():
-                if len(arg_list) > 0 and arg_list[0] == obj.__class__.__name__:
-                    objl.append(obj.__str__())
-                elif len(arg_list) == 0:
-                    objl.append(obj.__str__())
-            print(len(objl))
+                if len(arg_ls) > 0 and arg_ls[0] == obj.__class__.__name__:
+                    obj1.append(obj.__str__())
+                elif len(arg_ls) == 0:
+                    obj1.append(obj.__str__())
+            print(len(obj1))
 
     def show(self, cls):
         """
@@ -291,11 +287,11 @@ class HBNBCommand(cmd.Cmd):
             do_ method
         """
 
-        line_p = HBNBCommand.parse(line, '.')
-        if line_p[0] in HBNBCommand.__class_lst.keys() and len(line_p) > 1:
-            if line_p[1][:-2] in HBNBCommand.__class_funcs:
-                func = line_p[1][:-2]
-                cls = HBNBCommand.__class_lst[line_p[0]]
+        line = HBNBCommand.parse(line, '.')
+        if line[0] in HBNBCommand.__class_lst.keys() and len(line) > 1:
+            if line[1][:-2] in HBNBCommand.__class_funcs:
+                func = line[1][:-2]
+                cls = HBNBCommand.__class_lst[line[0]]
                 eval("self.do_" + func)(cls.__name__)
             else:
                 print("** class doesn't exist **")
